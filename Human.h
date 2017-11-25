@@ -33,9 +33,13 @@ public:
      * @param d the char of the disk.
      */
     void setDisk(char d);
+    void setPoint(int newPoints);
+    int getPoint();
+
 
 private:
     char disk;
+    int points;
 };
 
 

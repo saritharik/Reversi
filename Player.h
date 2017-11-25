@@ -22,6 +22,9 @@ public:
      * @return the disk.
      */
     virtual char getDisk() = 0;
+    void setPoint(int points);
+    int getPoint();
+
 };
 
 

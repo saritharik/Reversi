@@ -11,11 +11,12 @@ using namespace std;
 GameLogic::GameLogic(Player* p1, Player* p2, Board* b): p1(p1), p2(p2), b(b) {}
 void GameLogic::playGame() {
     int count = 0;
-    int num1 = 2, num2 = 2;
+    p1->setPoint(2);
+    p2->setPoint(2);
     int sum = ((this->b->getDimensions() - 1) * (this->b->getDimensions() - 1));
     Human currentPlayer(this->p1->getDisk());
     vector<Point>::iterator iter;
-    while(num1 + num2 < sum) {
+    while(p1->getPoint() + p2->getPoint() < sum) {
         cout << "Current board:" << endl;
         this->b->printBoard();
         if (count == 0) {
@@ -66,13 +67,11 @@ void GameLogic::playGame() {
         vector<Point> n2 = checking(p.getX(), p.getY(), currentPlayer.getDisk());
         oneMove(p.getX(), p.getY(), currentPlayer.getDisk());
         if (count == 0) {
-            num1++;
-            num1 = num1 + n1.size();
-            num2 -= n1.size();
+            p1->setPoint(1 + n1.size());
+            p2->setPoint(-n1.size());
         } else {
-            num2++;
-            num2 = num2 + n2.size();
-            num1 -= n2.size();
+            p2->setPoint(1 + n2.size());
+            p1->setPoint(-n2.size());
         }
         cout << endl;
         if (count == 0) {
@@ -82,9 +81,9 @@ void GameLogic::playGame() {
         }
     }
     this->b->printBoard();
-    if (num1 > num2) {
+    if (p1->getPoint() > p2->getPoint()) {
         cout << "X is the winner!";
-    } else if (num2 > num1) {
+    } else if (p2->getPoint() > p1->getPoint()) {
         cout <<  "O is the winner!";
     } else {
         cout << "The game ended in a draw";
@@ -266,4 +265,11 @@ vector<Point> GameLogic::checking(int i, int j, char a) {
     }
     vecTemp.clear();
     return this->v;
+}
+int GameLogic::getPointsByPlayer(char player) {
+    if (player == p1->getDisk()) {
+        return p1->getPoint();
+    } else {
+        return p2->getPoint();
+    }
 }

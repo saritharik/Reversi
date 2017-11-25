@@ -60,6 +60,7 @@ public:
      * @return true or false.
      */
     bool possibleMoves(Point p, char a);
+    int getPointsByPlayer(char player);
 
 private:
     Board* b;

@@ -28,3 +28,9 @@ char Human::getDisk() {
 void Human::setDisk(char d) {
     this->disk = d;
 }
+int Human::getPoint() {
+    return points;
+}
+void Human::setPoint(int newPoints) {
+    this->points += newPoints;
+}
