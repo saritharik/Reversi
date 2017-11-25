@@ -10,7 +10,9 @@
 
 using namespace std;
 
-Human::Human(char p): disk(p) {}
+Human::Human(char p): disk(p) {
+    points = 0;
+}
 Point Human::chooseSquare() {
     int x, y;
     char a;
