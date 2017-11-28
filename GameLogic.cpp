@@ -8,87 +8,11 @@
 #include <iostream>
 using namespace std;
 
-GameLogic::GameLogic(Player* p1, Player* p2, Board* b): p1(p1), p2(p2), b(b) {}
-void GameLogic::playGame() {
-    int count = 0;
-    p1->setPoint(2);
-    p2->setPoint(2);
-    int sum = ((this->b->getDimensions() - 1) * (this->b->getDimensions() - 1));
-    Human currentPlayer(this->p1->getDisk());
-    vector<Point>::iterator iter;
-    while(p1->getPoint() + p2->getPoint() < sum) {
-        cout << "Current board:" << endl;
-        this->b->printBoard();
-        if (count == 0) {
-            currentPlayer.setDisk(this->p1->getDisk());
-        } else {
-            currentPlayer.setDisk(this->p2->getDisk());
-        }
-        cout << currentPlayer.getDisk() << ": it's your move." << endl;
-        vector<Point> po = findPoints(currentPlayer.getDisk());
-        if (po.empty()) {
-            vector<Point> v1 = findPoints(this->p1->getDisk());
-            vector<Point> v2 = findPoints(this->p2->getDisk());
-            cout << "No possible move. Play passes back to the other player."
-                    "Press any key + enter to continue.";
-            char n;
-            cin >> n;
-            if (count == 0) {
-                count = 1;
-            } else {
-                count = 0;
-            }
-            if (v1.empty() && v2.empty()) {
-                break;
-            }
-            continue;
-        }
-        cout << "Your possible moves:";
-        for(iter = po.begin(); iter != po.end(); iter++) {
-            cout << "(" << iter.base()->getX() << ", "
-                 << iter.base()->getY() << ")";
-        }
-        cout << endl << endl;
-        cout << "Please enter your move row,col: (example: x,y)";
-        Point p = currentPlayer.chooseSquare();
-        while ((!possibleMoves(p, currentPlayer.getDisk()))
-               || (p.getY() == 0 && p.getX() == 0)) {
-            cout << "This the possible moves:";
-            po = findPoints(currentPlayer.getDisk());
-            for(iter = po.begin(); iter != po.end(); iter++) {
-                cout << "(" << iter.base()->getX() << ", "
-                     << iter.base()->getY() << ")";
-            }
-            cout << endl;
-            cout << "Please enter your move row,col: (example: x,y)";
-            p = currentPlayer.chooseSquare();
-        }
-        vector<Point> n1 = checking(p.getX(), p.getY(), currentPlayer.getDisk());
-        vector<Point> n2 = checking(p.getX(), p.getY(), currentPlayer.getDisk());
-        oneMove(p.getX(), p.getY(), currentPlayer.getDisk());
-        if (count == 0) {
-            p1->setPoint(1 + n1.size());
-            p2->setPoint(-n1.size());
-        } else {
-            p2->setPoint(1 + n2.size());
-            p1->setPoint(-n2.size());
-        }
-        cout << endl;
-        if (count == 0) {
-            count = 1;
-        } else {
-            count = 0;
-        }
-    }
-    this->b->printBoard();
-    if (p1->getPoint() > p2->getPoint()) {
-        cout << "X is the winner!";
-    } else if (p2->getPoint() > p1->getPoint()) {
-        cout <<  "O is the winner!";
-    } else {
-        cout << "The game ended in a draw";
-    }
+GameLogic::GameLogic(Board* b): b(b) {
+    this->oPoints = 2;
+    this->xPoints = 2;
 }
+
 bool GameLogic::possibleMoves(Point p, char a) {
     bool b = false;
     vector<Point>::iterator iter;
@@ -266,10 +190,19 @@ vector<Point> GameLogic::checking(int i, int j, char a) {
     vecTemp.clear();
     return this->v;
 }
+
+void GameLogic::setPlayerPoints(char player, int points) {
+    if (player == 'X') {
+        xPoints = points;
+    } else if (player == 'O') {
+        oPoints = points;
+    }
+}
+
 int GameLogic::getPointsByPlayer(char player) {
-    if (player == p1->getDisk()) {
-        return p1->getPoint();
+    if (player == 'X') {
+        return xPoints;
     } else {
-        return p2->getPoint();
+        return oPoints;
     }
 }

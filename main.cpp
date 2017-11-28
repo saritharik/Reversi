@@ -6,16 +6,17 @@
 #include <iostream>
 #include "GameLogic.h"
 #include "AI.h"
+#include "Game.h"
 
 using namespace std;
 
 int main() {
-    Human p1('X');
     //Human p2('O');
-    //AI p2(&game, &bC);
     BoardConsole bC(8, 8);
-    GameLogic game(&p1, &p2, &bC);
-
+    GameLogic gameLogic(&bC);
+    Human p1('X');
+    AI p2(&gameLogic, &bC);
+    Game game(&p1, &p2, &bC, gameLogic);
     game.playGame();
     return 0;
 }

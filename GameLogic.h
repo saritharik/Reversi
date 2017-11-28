@@ -21,11 +21,7 @@ public:
      * @param p1 first player.
      * @param p2 second player.
      */
-    GameLogic(Player* p1, Player* p2, Board* b);
-    /**
-     * Running the game.
-     */
-    void playGame();
+    GameLogic(Board* b);
     /**
      * Replace one disk in other.
      * @param i the row.
@@ -60,13 +56,16 @@ public:
      * @return true or false.
      */
     bool possibleMoves(Point p, char a);
+
     int getPointsByPlayer(char player);
+
+    void setPlayerPoints(char player, int points);
 
 private:
     Board* b;
     vector<Point> v;
-    Player* p1;
-    Player* p2;
+    int xPoints;
+    int oPoints;
 
 };
 
