@@ -11,7 +11,6 @@
 using namespace std;
 
 int main() {
-
     BoardConsole bC(8, 8);
     GameLogic gameLogic(&bC);
     Human p1('X');
