@@ -14,8 +14,8 @@ int main() {
     //Human p2('O');
     //AI p2(&game, &bC);
     BoardConsole bC(8, 8);
-    //GameLogic game(&p1, &p2, &bC);
+    GameLogic game(&p1, &p2, &bC);
 
-    //game.playGame();
+    game.playGame();
     return 0;
 }
