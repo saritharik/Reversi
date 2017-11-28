@@ -16,7 +16,7 @@ int main() {
     GameLogic gameLogic(&bC);
     Human p1('X');
     AI p2(&gameLogic, &bC);
-    Game game(&p1, &p2, &bC, gameLogic);
+    Game game(&p1, &p2, &bC, &gameLogic);
     game.playGame();
     return 0;
 }

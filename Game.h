@@ -13,7 +13,7 @@
 class Game {
 
 public:
-    Game(Player* p1, Player* p2, Board* b, GameLogic game);
+    Game(Player* p1, Player* p2, Board* b, GameLogic* game);
     /**
      * Running the game.
      */
@@ -23,7 +23,7 @@ private:
     Board* b;
     Player* p1;
     Player* p2;
-    GameLogic game;
+    GameLogic* game;
 };
 
 

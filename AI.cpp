@@ -2,6 +2,7 @@
 // Created by sarit on 25/11/17.
 //
 
+#include <iostream>
 #include "AI.h"
 
 AI::AI(GameLogic* g, Board* b): board(b), game(g) {
@@ -18,6 +19,7 @@ Point AI::chooseSquare() {
     vector<Point> vec = game->findPoints(getDisk());
     vector<Point>::iterator iter;
     for (iter = vec.begin(); iter != vec.end(); iter++) {
+        //put the current point on the board
         board->setSquare(iter.base()->getX(), iter.base()->getY(), getDisk());
         vector<Point> pointsToFlip = game->checking(iter.base()->getX(), iter.base()->getY(), getDisk());
         vector<Point>::iterator it;
@@ -36,6 +38,7 @@ Point AI::chooseSquare() {
         }
         board->setSquare(iter.base()->getX(), iter.base()->getY(), ' ');
     }
+    //cout << choice.getX() << choice.getY() << endl;
     return choice;
 }
 
@@ -43,10 +46,10 @@ int AI::maxOption() {
     int max = 0;
     int boardPoints = 0;
     int points;
-    vector<Point> vec = game->findPoints('X');
-    vector<Point>::iterator iter;
-    for (iter = vec.begin(); iter != vec.end(); iter++) {
-        points = game->checking(iter.base()->getX(), iter.base()->getY(), 'X').size();
+    vector<Point> vec1 = game->findPoints('X');
+    vector<Point>::iterator iter1;
+    for (iter1 = vec1.begin(); iter1 != vec1.end(); iter1++) {
+        points = game->checking(iter1.base()->getX(), iter1.base()->getY(), 'X').size();
         boardPoints = 1 + (2 * points) + game->getPointsByPlayer('X') - getPoint();
         if (boardPoints > max) {
             max = boardPoints;
@@ -54,6 +57,7 @@ int AI::maxOption() {
     }
     return boardPoints;
 }
+
 void AI::setPoint(int newPoints) {
     points += newPoints;
 }

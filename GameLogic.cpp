@@ -45,6 +45,7 @@ void GameLogic::oneMove(int i, int j, char a) {
     }
     this->v.clear();
 }
+
 vector<Point> GameLogic::findPoints(char a) {
     vector<Point> points;
     vector<Point> check;
@@ -64,6 +65,7 @@ vector<Point> GameLogic::findPoints(char a) {
     }
     return points;
 }
+
 vector<Point> GameLogic::checking(int i, int j, char a) {
     vector<Point>::iterator it;
     int row = i; int col = j;
