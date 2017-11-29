@@ -61,6 +61,17 @@ void BoardConsole::printBoard() const{
     }
 }
 
+bool BoardConsole::operator ==(const BoardConsole& b1) const {
+    for (int i = 0; i < this->row; i++) {
+        for (int j = 0; j < this->col; j++) {
+            if (this->array[i][j] != b1.array[i][j]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 BoardConsole::~BoardConsole() {
     for(int i = 0; i < this->row; ++i) {
         delete[] this->array[i];

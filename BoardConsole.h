@@ -48,6 +48,7 @@ public:
      * @return the dimensions.
      */
     virtual int getDimensions();
+    bool operator ==(const BoardConsole& b1) const;
 
 
 private:
