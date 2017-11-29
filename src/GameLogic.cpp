@@ -3,8 +3,9 @@
 using namespace std;
 
 GameLogic::GameLogic(Board* b): b(b) {
-    this->oPoints = 2;
-    this->xPoints = 2;
+    int const startPoint = 2;
+    this->oPoints = startPoint;
+    this->xPoints = startPoint;
 }
 
 bool GameLogic::possibleMoves(Point p, char a) {

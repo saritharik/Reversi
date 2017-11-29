@@ -5,6 +5,7 @@
 #include "Board.h"
 #include "Player.h"
 #include "GameLogic.h"
+#include "UserInterface.h"
 
 class Game {
 
@@ -16,7 +17,7 @@ public:
      * @param b - the board.
      * @param game - game logic.
      */
-    Game(Player* p1, Player* p2, Board* b, GameLogic* game);
+    Game(Player* p1, Player* p2, Board* b, GameLogic* game, UserInterface* userInter);
     /**
      * Running the game.
      */
@@ -27,6 +28,7 @@ private:
     Player* p1;
     Player* p2;
     GameLogic* game;
+    UserInterface* userInter;
 };
 
 

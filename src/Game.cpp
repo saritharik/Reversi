@@ -1,30 +1,31 @@
 #include <iostream>
 #include "../include/Game.h"
-Game::Game(Player *p1, Player *p2, Board *b, GameLogic* game):
-        p1(p1), p2(p2), b(b), game(game) {}
+Game::Game(Player *p1, Player *p2, Board *b, GameLogic* game,
+           UserInterface* userInter):
+        p1(p1), p2(p2), b(b), game(game), userInter(userInter) {}
 
 void Game::playGame() {
     int count = 0;
-    p1->setPoint(2);
-    p2->setPoint(2);
+    int const startPoint = 2;
+    p1->setPoint(startPoint);
+    p2->setPoint(startPoint);
     int sum = ((this->b->getDimensions() - 1) * (this->b->getDimensions() - 1));
     Player* currentPlayer = p1;
     vector<Point>::iterator iter;
     while(p1->getPoint() + p2->getPoint() < sum) {
-        cout << "Current board:" << endl;
+        userInter->startMove();
         this->b->printBoard();
         if (count == 0) {
             currentPlayer = p1;
         } else {
             currentPlayer = p2;
         }
-        cout << currentPlayer->getDisk() << ": it's your move." << endl;
+        userInter->currentPlayerMsg(currentPlayer->getDisk());
         vector<Point> po = game->findPoints(currentPlayer->getDisk());
+        userInter->optionsToMove(po);
         if (po.empty()) {
             vector<Point> v1 = game->findPoints(this->p1->getDisk());
             vector<Point> v2 = game->findPoints(this->p2->getDisk());
-            cout << "No possible move. Play passes back to the other player."
-                    "Press any key + enter to continue.";
             if (count == 0) {
                 count = 1;
             } else {
@@ -35,24 +36,10 @@ void Game::playGame() {
             }
             continue;
         }
-        cout << "Your possible moves:";
-        for(iter = po.begin(); iter != po.end(); iter++) {
-            cout << "(" << iter.base()->getX() << ", "
-                 << iter.base()->getY() << ")";
-        }
-        cout << endl << endl;
-        cout << "Please enter your move row,col: (example: x,y)";
         Point p = currentPlayer->chooseSquare();
         while ((!game->possibleMoves(p, currentPlayer->getDisk()))
                || (p.getY() == 0 && p.getX() == 0)) {
-            cout << "This the possible moves:";
-            po = game->findPoints(currentPlayer->getDisk());
-            for(iter = po.begin(); iter != po.end(); iter++) {
-                cout << "(" << iter.base()->getX() << ", "
-                     << iter.base()->getY() << ")";
-            }
-            cout << endl;
-            cout << "Please enter your move row,col: (example: x,y)";
+            userInter->uncorrectMoves(po);
             p = currentPlayer->chooseSquare();
         }
         vector<Point> n1 = game->checking(p.getX(), p.getY(), currentPlayer->getDisk());
@@ -78,10 +65,10 @@ void Game::playGame() {
     }
     this->b->printBoard();
     if (p1->getPoint() > p2->getPoint()) {
-        cout << "X is the winner!";
+        userInter->endOfGame(p1->getDisk());
     } else if (p2->getPoint() > p1->getPoint()) {
-        cout <<  "O is the winner!";
+        userInter->endOfGame(p2->getDisk());
     } else {
-        cout << "The game ended in a draw";
+        userInter->endOfGame(' ');
     }
 }

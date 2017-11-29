@@ -8,7 +8,8 @@ include_directories(src lib/googletest-release-1.8.0/googletest/include)
 include_directories(lib/googletest-release-1.8.0/googlemock/include)
 set(SOURCE_FILES src/BoardConsole.cpp include/BoardConsole.h src/GameLogic.cpp include/GameLogic.h
         src/Point.cpp include/Point.h include/Board.h include/Player.h src/Human.cpp include/Human.h
-        src/AI.cpp include/AI.h src/Game.cpp include/Game.h)
+        src/AI.cpp include/AI.h src/Game.cpp include/Game.h include/UserInterface.h
+        include/UserPrinterConsole.h src/UserPrinterConsole.cpp)
 set(TEST_FILES tests/BoardTest.cpp
         tests/BoardTest.h tests/AITest.cpp tests/AITest.h tests/HumanTest.cpp tests/HumanTest.h
         tests/PointTest.cpp tests/PointTest.h  tests/GameLogicTest.cpp tests/GameLogicTest.h)

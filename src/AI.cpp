@@ -10,7 +10,8 @@ char AI::getDisk() {
 }
 
 Point AI::chooseSquare() {
-    int min = 100;
+    int const startValue = 100;
+    int min = startValue;
     Point choice(0,0);
     vector<Point> vec = game->findPoints(getDisk());
     vector<Point>::iterator iter;
