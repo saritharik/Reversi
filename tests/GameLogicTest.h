@@ -5,7 +5,7 @@
 #ifndef EX2_GAMELOGICTEST_H
 #define EX2_GAMELOGICTEST_H
 #include "../gtest_src/gtest.h"
-#include "../GameLogic.h"
+#include "../include/GameLogic.h"
 #include <iostream>
 using namespace std;
 

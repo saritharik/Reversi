@@ -5,7 +5,7 @@
 #ifndef EX2_AITEST_H
 #define EX2_AITEST_H
 #include "../gtest_src/gtest.h"
-#include "../AI.h"
+#include "../include/AI.h"
 
 class AITest: public testing::Test {
 public:

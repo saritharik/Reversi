@@ -6,7 +6,7 @@
 #define EX2_BOARDTEST_H
 
 #include "../gtest_src/gtest.h"
-#include "../BoardConsole.h"
+#include "../include/BoardConsole.h"
 
 #include <iostream>
 using namespace std;

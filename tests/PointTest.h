@@ -5,7 +5,7 @@
 #ifndef EX2_POINTTEST_H
 #define EX2_POINTTEST_H
 #include "../gtest_src/gtest.h"
-#include "../Point.h"
+#include "../include/Point.h"
 
 class PointTest: public testing::Test {
 public:

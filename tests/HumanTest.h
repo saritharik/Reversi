@@ -5,7 +5,7 @@
 #ifndef EX2_HUMANTEST_H
 #define EX2_HUMANTEST_H
 #include "../gtest_src/gtest.h"
-#include "../Human.h"
+#include "../include/Human.h"
 
 class HumanTest: public testing::Test {
 public:
